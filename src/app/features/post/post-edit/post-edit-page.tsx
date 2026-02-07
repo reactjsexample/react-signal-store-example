@@ -12,6 +12,10 @@ function PostEditPage() {
 
     useSignals(); // re-render view when signals change
 
+    function handleChangeBody() {
+
+    }
+
     return (
         <main>
             <section>
@@ -47,44 +51,40 @@ function PostEditPage() {
             {PostStore.isSelectedPost.value && (
                 <section>
                     <h3>Post Edit</h3>
-                    <form className="bg-[aliceblue] p-4 flex flex-col gap-2">
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td>User Id:</td>
-                                <td>
-                                    <input type="text" name="userid" readOnly
-                                           value={PostStore.selectedPost.value?.userId}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Post Id:</td>
-                                <td><input type="text" name="id" readOnly
-                                           value={PostStore.selectedPost.value?.id}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td>Title:</td>
-                                <td>
-                                    <input type="text" name="title"
-                                           value={PostStore.selectedPost.value?.title}
-                                    />
-                                    <span className="text-[red]">*</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Body:</td>
-                                <td>
-                                    <input type="text" name="body"
-                                           value={PostStore.selectedPost.value?.body}
-                                    />
-                                    <span className="text-[red]">*</span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </form>
+                    <div>
+                        <form className="form-grid-container">
+                            <label htmlFor="userid">User Id:</label>
+                            <input type="text" name="userid" id="userid" readOnly
+                                   value={PostStore.selectedPost.value?.userId}
+                            />
+
+                            <label htmlFor="postid">Post Id:</label>
+                            <input type="text" name="id" id="postid" readOnly
+                                   value={PostStore.selectedPost.value?.id}
+                            />
+
+                            <label htmlFor="title">
+                                <span className="required">*</span>
+                                <span>Title:</span>
+                            </label>
+                            <input type="text" name="title" id="title"
+                                   value={PostStore.selectedPost.value?.title}
+                            />
+
+                            <label>
+                                <span className="required">*</span>
+                                <span>Body:</span>
+                            </label>
+                            <textarea
+                                id="post-body" // Link the label to the textarea for accessibility
+                                value={PostStore.selectedPost.value?.body} // The value is controlled by the React signal state
+                                name="body"
+                                onChange={handleChangeBody} // Call handleChange whenever the user types
+                                rows={5} // Specify the number of visible rows
+                                cols={30} // Specify the number of visible columns
+                            />
+                        </form>
+                    </div>
                 </section>
             )}
         </main>
