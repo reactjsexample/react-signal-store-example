@@ -15,9 +15,9 @@ function PostEditPage() {
 
     const handleChange = (event: { target: { name: string; value: string; }; }) => {
         const {name, value} = event.target;
-        if (PostStore.selectedPost.value) {
+        if (PostStore.newPost.value) {
             const post: PostType = {
-                ...PostStore.selectedPost.value,
+                ...PostStore.newPost.value,
                 [name]: value,
             }
             PostStore.setNewPost(post);
