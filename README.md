@@ -77,6 +77,9 @@ Create a new project using React with Vite.
 ```
 npm create vite@latest react-signal-store-example
 ```
+Select options:
+React
+TypeScript
 
 Share project on GitHub
 
@@ -86,18 +89,19 @@ Install React Router
 npm i react-router 
 ```
 
+## Install React Signals
 
-Install React Signals
-
+### Install signals-react
 ```
 npm install @preact/signals-react
 ```
 
-
+### Install signals-react-transform
 ```
-npm i --save-dev @preact/signals-react-transform 
+npm i -D @preact/signals-react-transform 
 ```
 
+### Install babel plugin to compile signals
 ```
 npm install -D babel-plugin-react-compiler@latest
 ```
