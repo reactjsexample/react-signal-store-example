@@ -9,7 +9,7 @@ main {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
@@ -54,4 +54,12 @@ tbody>tr:hover {
 
 tbody>tr.active {
     background-color: gold;
+}
+
+li {
+    padding: 0.25rem;
+}
+
+li.active {
+    background-color: lightcyan;
 }

@@ -1,6 +1,6 @@
 import {computed, Signal, signal} from '@preact/signals-react';
-import {type UserApiResponse, userInitialState, type UserState, type UserType} from "./userTypes";
-import {userDataService} from "./userDataService";
+import {type UserApiResponse, userInitialState, type UserState, type UserType} from "./user-types.tsx";
+import {userDataService} from "./user-data-service.ts";
 
 // State
 // It is a single data object to store all the properties needed to support the view.
@@ -12,7 +12,6 @@ const userState: Signal<UserState> = signal<UserState>(userInitialState);
 // By design, it is the only way to read the state.
 export const isUsersError: Signal<boolean> = computed(() => userState.value.isUsersError);
 export const isUsersLoading: Signal<boolean> = computed(() => userState.value.isUsersLoading);
-export const selectedUserId: Signal<number | null> = computed(() => userState.value.selectedUserId ? userState.value.selectedUserId : null);
 export const users: Signal<UserType[]> = computed(() => userState.value.users);
 
 // calculated selectors
@@ -28,7 +27,6 @@ const getUsers = (): void => {
             isUsersError: false,
             isUsersLoading: true,
             users: [],
-            selectedUserId: undefined
         };
 
     try {
@@ -38,7 +36,8 @@ const getUsers = (): void => {
                     ...userState.value,
                     isUsersLoading: false,
                     users: response.users
-                }            });
+                };
+            });
     } catch (error) {
         console.error(error)
         userState.value =
@@ -49,14 +48,6 @@ const getUsers = (): void => {
             };
     }
 };
-
-export function setSelectedUserId(userId: number): void {
-    userState.value =
-        {
-            ...userState.value,
-            selectedUserId: userId
-        };
-}
 
 export function showUsers(): void {
     if (!isUsersLoaded.value && !isUsersLoading.value) {

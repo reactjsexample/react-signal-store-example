@@ -15,13 +15,11 @@ export interface UserApiResponse {
 export const userInitialState: UserState = {
     isUsersError: false,
     isUsersLoading: false,
-    selectedUserId: undefined,
     users: []
 };
 
 export interface UserState {
     isUsersError: boolean;
     isUsersLoading: boolean;
-    selectedUserId: number | undefined;
     users: UserType[];
 }

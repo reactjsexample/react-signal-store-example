@@ -1,4 +1,4 @@
-// src/app/features/post/post-edit/PostEditPage.tsx
+// src/app/features/post/post-edit/post-edit-page.tsx
 
 function PostEditPage() {
     return (
