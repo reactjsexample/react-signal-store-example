@@ -105,4 +105,24 @@ npm i -D @preact/signals-react-transform
 ```
 npm install -D babel-plugin-react-compiler@latest
 ```
+### Install Tailwind
+
+```
+npm install tailwindcss @tailwindcss/vite
+```
+
+Configure the Tailwind Vite plugin in your vite.config.ts
+
+```Typescript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+})
+```
 
