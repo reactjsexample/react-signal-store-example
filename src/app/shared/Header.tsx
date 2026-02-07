@@ -22,6 +22,9 @@ function MyHeader() {
                     <li className={`${AppStore.selectedPage.value === 'post' ? 'active' : ''}`}>
                     <Link className="p-2" to="/post">Posts</Link>
                     </li>
+                    <li className={`${AppStore.selectedPage.value === 'post-edit' ? 'active' : ''}`}>
+                        <Link className="p-2" to="/post-edit">Post Edit</Link>
+                    </li>
                 </ul>
             </nav>
             </div>

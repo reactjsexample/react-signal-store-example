@@ -15,9 +15,8 @@ function App() {
                 {/* 'element' prop replaces child components */}
                 <Route path="/" element={<HomePage/>}/>
                 <Route path="/user" element={<UserPage/>}/>
-                <Route path="/post" element={<PostPage/>}>
-                    <Route path="/post/edit" element={<PostEditPage/>}/>
-                </Route>
+                <Route path="/post" element={<PostPage/>}/>
+                <Route path="/post-edit" element={<PostEditPage/>}/>
                 {/* Catch-all route uses path="*" */}
                 <Route path="*" element={<HomePage/>}/>
             </Routes>

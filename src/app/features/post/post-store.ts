@@ -27,16 +27,11 @@ export const newPost: Signal<PostType | undefined> = computed(() => postState.va
 export const posts: Signal<PostType[]> = computed(() => postState.value.posts);
 export const postUserId: Signal<number | undefined> = computed(() => postState.value.postUserId);
 export const selectedPostId: Signal<number | undefined> = computed(() => postState.value.selectedPostId);
-
 export const selectedPost: Signal<PostType | undefined> = computed(() => {
-    let post: PostType | undefined;
-    const thePosts: PostType[] = posts.value;
-    const postId: number | undefined = selectedPostId.value;
-    if (postId !== undefined && thePosts.length > 0) {
-        post = thePosts.find(item => item.id === postId);
-    }
-    return post;
+    if(isNoSelectedPost.value) return undefined;
+    return posts.value.find(post => post.id === selectedPostId.value)
 });
+export const isSelectedPost: Signal<boolean> = computed(() => selectedPost.value !== undefined);
 
 export const isSaveButtonDisabled: Signal<boolean> = computed(() => (
     !isLoaded.value

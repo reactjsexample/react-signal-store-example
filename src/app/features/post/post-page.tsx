@@ -30,7 +30,7 @@ function PostPage() {
             {AppStore.isNoSelectedUser.value && (
                 <>
                     <div>There is no selected user.</div>
-                    <div>Go to User page to select a user.</div>
+                    <div>Go to Users page to select a user.</div>
                 </>
             )}
 
@@ -47,11 +47,10 @@ function PostPage() {
             )}
 
             {PostStore.isLoaded.value && (
-
                 <section>
                     <h3>Select a Post to edit</h3>
                     <p>User Id: {AppStore.selectedUserId.value}</p>
-                    <table>
+                    <table className="data-table">
                         <thead>
                         <tr>
                             <th>Id</th>
@@ -76,7 +75,7 @@ function PostPage() {
                 </section>
             )}
         </main>
-    )
+    );
 }
 
 export default PostPage;

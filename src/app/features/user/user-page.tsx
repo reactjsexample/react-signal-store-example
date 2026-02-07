@@ -43,7 +43,7 @@ function UserPage() {
             {UserStore.isUsersLoaded.value && (
                 <section>
                     <h3>Select a User to see Posts</h3>
-                    <table>
+                    <table className="data-table">
                         <thead>
                         <tr>
                             <th>ID</th>
