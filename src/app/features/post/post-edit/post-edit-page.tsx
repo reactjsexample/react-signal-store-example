@@ -4,6 +4,7 @@ import * as AppStore from "../../../app-store.tsx";
 import * as PostStore from "../post-store.ts"
 import {useEffect} from "react";
 import {useSignals} from "@preact/signals-react/runtime";
+import type {PostType} from "../post-types.ts";
 
 function PostEditPage() {
     useEffect(() => {
@@ -12,9 +13,17 @@ function PostEditPage() {
 
     useSignals(); // re-render view when signals change
 
-    function handleChangeBody() {
-
-    }
+    const handleChange = (event: { target: { name: string; value: string; }; }) => {
+        const {name, value} = event.target;
+        console.log("before", name, value);
+        if (PostStore.selectedPost.value) {
+            const post: PostType = {
+                ...PostStore.selectedPost.value,
+                [name]: value,
+            }
+            PostStore.setNewPost(post);
+        }
+    };
 
     return (
         <main>
@@ -55,12 +64,12 @@ function PostEditPage() {
                         <form className="form-grid-container">
                             <label htmlFor="userid">User Id:</label>
                             <input type="text" name="userid" id="userid" readOnly
-                                   value={PostStore.selectedPost.value?.userId}
+                                   value={PostStore.newPost.value?.userId}
                             />
 
                             <label htmlFor="postid">Post Id:</label>
                             <input type="text" name="id" id="postid" readOnly
-                                   value={PostStore.selectedPost.value?.id}
+                                   value={PostStore.newPost.value?.id}
                             />
 
                             <label htmlFor="title">
@@ -68,8 +77,8 @@ function PostEditPage() {
                                 <span>Title:</span>
                             </label>
                             <input type="text" name="title" id="title"
-                                   value={PostStore.selectedPost.value?.title}
-                            />
+                                   value={PostStore.newPost.value?.title}
+                                   onChange={handleChange}/>
 
                             <label>
                                 <span className="required">*</span>
@@ -77,9 +86,9 @@ function PostEditPage() {
                             </label>
                             <textarea
                                 id="post-body" // Link the label to the textarea for accessibility
-                                value={PostStore.selectedPost.value?.body} // The value is controlled by the React signal state
+                                value={PostStore.newPost.value?.body} // The value is controlled by the React signal state
                                 name="body"
-                                onChange={handleChangeBody} // Call handleChange whenever the user types
+                                onChange={handleChange}
                                 rows={5} // Specify the number of visible rows
                                 cols={30} // Specify the number of visible columns
                             />

@@ -101,10 +101,13 @@ export const setNewPost = (post: PostType) => {
 export const setSelectedPostId = (postId: number) => {
     // make sure the post exists
     if (postState.value.posts.some(item => item.id === postId)) {
+        // Get the selected post.
+        // set the newPost which holds the state of the form data
+        const newPost: PostType | undefined = posts.value.find(post => post.id === postId);
         postState.value =
             ({
                 ...postState.value,
-                newPost: undefined,
+                newPost,
                 selectedPostId: postId
             })
     }
