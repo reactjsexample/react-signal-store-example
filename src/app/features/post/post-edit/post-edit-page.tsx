@@ -15,7 +15,6 @@ function PostEditPage() {
 
     const handleChange = (event: { target: { name: string; value: string; }; }) => {
         const {name, value} = event.target;
-        console.log("before", name, value);
         if (PostStore.selectedPost.value) {
             const post: PostType = {
                 ...PostStore.selectedPost.value,
