@@ -71,3 +71,34 @@ export default defineConfig([
   },
 ])
 ```
+## Installation and Setup
+
+Create a new project using React with Vite. 
+```
+npm create vite@latest react-signal-store-example
+```
+
+Share project on GitHub
+
+Install React Router
+
+```
+npm i react-router 
+```
+
+
+Install React Signals
+
+```
+npm install @preact/signals-react
+```
+
+
+```
+npm i --save-dev @preact/signals-react-transform 
+```
+
+```
+npm install -D babel-plugin-react-compiler@latest
+```
+
