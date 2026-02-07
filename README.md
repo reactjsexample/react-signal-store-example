@@ -125,4 +125,10 @@ export default defineConfig({
   ],
 })
 ```
+#### Install Tailwind CSS Language Server
 
+For IntelliJ auto-complete with Tailwind CSS, install the Tailwind CSS Language Server globally.
+
+```
+npm install -g @tailwindcss/language-server
+```

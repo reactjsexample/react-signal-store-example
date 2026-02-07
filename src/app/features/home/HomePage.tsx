@@ -1,13 +1,13 @@
 // src/pages/HomePage.jsx
-import React from 'react';
 
 function HomePage() {
-    console.log('Home');
     return (
-        <div>
-            <h1>Welcome to the Home Page!</h1>
-            <p>This is the main content of the application.</p>
-        </div>
+        <main>
+            <section>
+                <h2>Home</h2>
+                <h3>Go to the Users page to see a list of Users</h3>
+            </section>
+        </main>
     );
 }
 
