@@ -89,6 +89,16 @@ Install React Router
 npm i react-router 
 ```
 
+Install React Router Dev
+To use a routes file, install the router dev package.
+
+```
+npm install @react-router/dev --save-dev
+```
+
+
+
+
 ## Install React Signals
 
 ### Install signals-react

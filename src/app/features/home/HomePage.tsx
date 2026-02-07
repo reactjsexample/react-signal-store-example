@@ -1,4 +1,4 @@
-// src/pages/HomePage.jsx
+// src/app/features/home/HomePage.tsx
 
 function HomePage() {
     return (

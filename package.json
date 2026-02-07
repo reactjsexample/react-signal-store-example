@@ -20,6 +20,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@preact/signals-react-transform": "^0.8.1",
+    "@react-router/dev": "^7.13.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",

@@ -1,5 +1,4 @@
-// src/pages/HomePage.jsx
-import React from 'react';
+// src/app/features/post/post-edit/PostEditPage.tsx
 
 function PostEditPage() {
     return (

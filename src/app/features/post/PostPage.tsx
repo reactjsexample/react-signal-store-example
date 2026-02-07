@@ -1,5 +1,4 @@
-// src/pages/HomePage.jsx
-import React from 'react';
+// src/app/features/post/PostPage.tsx
 
 function PostPage() {
     console.log('Posts');

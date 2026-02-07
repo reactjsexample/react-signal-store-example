@@ -26,7 +26,7 @@ function UserPage() {
     const handleRowClick = (userId: number) => {
         // navigate to the user details page
         setSelectedUserId(userId);
-        navigate(`/posts/${userId.toString()}`);
+        navigate(`/post/${userId.toString()}`);
     };
 
     return (
