@@ -5,6 +5,7 @@ import * as PostStore from "../post-store.ts"
 import {useEffect} from "react";
 import {useSignals} from "@preact/signals-react/runtime";
 import type {PostType} from "../post-types.ts";
+import {type NavigateFunction, useNavigate} from "react-router";
 
 function PostEditPage() {
     useEffect(() => {
@@ -12,8 +13,11 @@ function PostEditPage() {
     }, []) // do this once after page is loaded
 
     useSignals(); // re-render view when signals change
+    const navigate: NavigateFunction = useNavigate(); // initialize the navigate function
 
     const handleChange = (event: { target: { name: string; value: string; }; }) => {
+        // Get name & value pair for changed input
+        // Map the name to a state property and set the new value
         const {name, value} = event.target;
         if (PostStore.newPost.value) {
             const post: PostType = {
@@ -22,6 +26,13 @@ function PostEditPage() {
             }
             PostStore.setNewPost(post);
         }
+    };
+
+    const handleSubmit = (event: { preventDefault: () => void; }) => {
+        // Prevent default browser form submission (page reload)
+        event.preventDefault();
+        PostStore.updatePost();
+        navigate("/post");
     };
 
     return (
@@ -60,7 +71,7 @@ function PostEditPage() {
                 <section>
                     <h3>Post Edit</h3>
                     <div>
-                        <form className="form-grid-container">
+                        <form className="form-grid-container" onSubmit={handleSubmit}>
                             <label htmlFor="userid">User Id:</label>
                             <input type="text" name="userid" id="userid" readOnly
                                    value={PostStore.newPost.value?.userId}
@@ -91,6 +102,9 @@ function PostEditPage() {
                                 rows={5} // Specify the number of visible rows
                                 cols={30} // Specify the number of visible columns
                             />
+                            <div className="row-centered">
+                                <input className="submit" type="submit" value="Save" disabled={PostStore.isSaveButtonDisabled.value} />
+                            </div>
                         </form>
                     </div>
                 </section>

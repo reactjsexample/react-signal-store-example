@@ -33,11 +33,25 @@ export const selectedPost: Signal<PostType | undefined> = computed(() => {
 });
 export const isSelectedPost: Signal<boolean> = computed(() => selectedPost.value !== undefined);
 
+export const isPostFormValid: Signal<boolean> = computed(()=>{
+    let isValid = true;
+    isValid = isValid &&
+        newPost.value !== undefined &&
+        newPost.value.title !== undefined &&
+        newPost.value.title.length > 0;
+    isValid = isValid &&
+        newPost.value !== undefined &&
+        newPost.value.body !== undefined &&
+        newPost.value.body.length > 0;
+    return isValid;
+})
+
 export const isSaveButtonDisabled: Signal<boolean> = computed(() => (
     !isLoaded.value
     || selectedPost.value === undefined
     || newPost.value === undefined
     || isPostsEqual(newPost.value, selectedPost.value))
+    || !isPostFormValid.value
 );
 
 function isPostsEqual(post1: PostType | undefined, post2: PostType | undefined): boolean {
@@ -137,8 +151,9 @@ export const updatePost = (): void => {
 
     try {
         postDataService.updatePost(post)
-            .then((response) => {
-                console.log(response);
+            .then(() => {
+                // the mock api does not actually do any PUT, POST, or DELETE
+                // so we mock the changes to the state to include the expected change for a real API
                 // remove the old post
                 const posts = postState.value.posts.filter(item => item.id !== post.id);
                 // add the new post

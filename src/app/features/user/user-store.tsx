@@ -18,6 +18,7 @@ export const users: Signal<UserType[]> = computed(() => userState.value.users);
 export const isUsersLoaded: Signal<boolean> = computed(() => !isUsersLoading.value && users.value.length > 0);
 export const isUsersEmpty: Signal<boolean> = computed(() => !isUsersLoading.value && users.value.length === 0);
 
+
 // Actions
 // An action is a method that will update the state and or change the view or behavior.
 const getUsers = (): void => {
