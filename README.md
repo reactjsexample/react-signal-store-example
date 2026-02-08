@@ -142,3 +142,12 @@ For IntelliJ auto-complete with Tailwind CSS, install the Tailwind CSS Language 
 ```
 npm install -g @tailwindcss/language-server
 ```
+
+## Install Icons
+
+Install react-icons so that we can use Font Awesome icons.
+
+```
+npm install react-icons 
+```
+
