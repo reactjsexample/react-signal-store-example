@@ -4,7 +4,7 @@ import * as PostStore from "./postStore.ts";
 import type {PostType} from "./postTypes.ts";
 import {useEffect} from "react";
 import {useSignals} from "@preact/signals-react/runtime";
-import Search from "../../shared/Search.tsx";
+import Search from "../../shared/search/Search.tsx";
 
 /**
  * PostPage is the Posts page

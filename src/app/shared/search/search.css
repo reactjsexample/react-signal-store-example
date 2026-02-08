@@ -1,0 +1,24 @@
+.search-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center; /* Vertically center the input and icon */
+    width: 100%; /* Adjust width as needed */
+}
+
+.search-input {
+    /* Add padding to the left to make space for the icon */
+    padding-left: 35px;
+    height: 40px; /* Adjust height as needed */
+    width: 100%;
+    /* Add other styling like border, border-radius, etc. */
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px; /* Position the icon from the left edge of the wrapper */
+    color: #aaa; /* Style the icon color */
+    font-size: 16px; /* Adjust icon size as needed */
+    /* Center the icon vertically */
+    top: 50%;
+    transform: translateY(-50%);
+}

@@ -1,4 +1,6 @@
-import type {DropdownOption} from "../appTypes.tsx";
+import type {DropdownOption} from "../../appTypes.tsx";
+import {FaSearch} from 'react-icons/fa';
+import "./search.css";
 import SearchDropdown from "./SearchDropdown.tsx";
 
 type SearchProps = {
@@ -9,7 +11,7 @@ type SearchProps = {
     selectedValue: string;
 }
 
-function Search ({dropdownOptions, onSearchOptionChange, onSearchTextChange, searchText,  selectedValue} : SearchProps){
+function Search({dropdownOptions, onSearchOptionChange, onSearchTextChange, searchText, selectedValue}: SearchProps) {
     return (
         <div className="flex w-full justify-end gap-2 items-center">
             <label>Search by:</label>
@@ -18,12 +20,15 @@ function Search ({dropdownOptions, onSearchOptionChange, onSearchTextChange, sea
                 onSearchOptionChange={onSearchOptionChange}
                 selectedValue={selectedValue}
             />
-            <input
-                className="bg-[whitee] border border-solid border-[black] p-1"
-                type="search"
-                onChange={onSearchTextChange}
-                value={searchText}
-            />
+            <div className="search-input-wrap">
+                <input
+                    className="search-input bg-[whitee] border border-solid border-[black] p-1"
+                    type="search"
+                    onChange={onSearchTextChange}
+                    value={searchText}
+                />
+                <FaSearch className="search-icon"/>
+            </div>
         </div>
     );
 }

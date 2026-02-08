@@ -4,7 +4,7 @@ import {useEffect} from 'react';
 import * as UserStore from "./userStore.tsx";
 import type {UserType} from "./userTypes.tsx";
 import {useSignals} from "@preact/signals-react/runtime";
-import Search from "../../shared/Search.tsx";
+import Search from "../../shared/search/Search.tsx";
 
 /**
  * UserPage is the Users page

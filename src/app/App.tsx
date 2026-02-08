@@ -1,4 +1,4 @@
-import './app.css';
+import "./app.css";
 import Header from "./shared/Header.tsx";
 import HomePage from "./features/home/HomePage.tsx";
 import PostEditPage from "./features/post/post-edit/PostEditPage.tsx";

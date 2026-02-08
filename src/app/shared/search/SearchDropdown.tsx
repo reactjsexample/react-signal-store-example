@@ -1,4 +1,4 @@
-import type {DropdownOption} from "../appTypes.tsx";
+import type {DropdownOption} from "../../appTypes.tsx";
 
 type SearchDropdownProps = {
     dropdownOptions: DropdownOption[];
