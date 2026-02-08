@@ -1,11 +1,15 @@
-// src/pages/HomePage.jsx
-import * as UserStore from "./userStore.tsx";
-import {type NavigateFunction, useNavigate} from "react-router";
 import * as AppStore from "../../appStore.tsx";
+import {type NavigateFunction, useNavigate} from "react-router";
 import {useEffect} from 'react';
+import * as UserStore from "./userStore.tsx";
 import type {UserType} from "./userTypes.tsx";
 import {useSignals} from "@preact/signals-react/runtime";
+import Search from "../../shared/search/Search.tsx";
 
+/**
+ * UserPage is the Users page
+ * @constructor useSignals connects to any referenced Signal Store
+ */
 function UserPage() {
     useEffect(() => {
         AppStore.setSelectedPage('user');
@@ -16,16 +20,33 @@ function UserPage() {
 
     const navigate: NavigateFunction = useNavigate(); // initialize the navigate function
 
-    const handleRowClick = (userId: number) => {
+    const handleRowClick = (userId: string) => {
         // navigate to the user details page
         AppStore.setSelectedUserId(userId);
         navigate("/post");
     };
 
+    function handleSearchOptionChange(event: { target: { value: string; }; }) {
+        const value: string = event.target.value;
+        UserStore.setSelectedSearchOptionValue(value);
+    }
+
+    function handleSearchTextChange(event: { target: { value: string; }; }) {
+        const value: string = event.target.value;
+        UserStore.setSearchText(value);
+    }
+
     return (
         <main>
-            <section>
+            <section className="flex justify-between">
                 <h2>Users</h2>
+                <Search
+                    dropdownOptions={UserStore.searchOptions.value}
+                    onSearchOptionChange={handleSearchOptionChange}
+                    onSearchTextChange={handleSearchTextChange}
+                    searchText={UserStore.searchText.value}
+                    selectedValue={UserStore.selectedSearchOptionValue.value}
+                />
             </section>
 
             {UserStore.isUsersLoading.value && (
@@ -52,7 +73,7 @@ function UserPage() {
                         </tr>
                         </thead>
                         <tbody>
-                        {UserStore.users.value.map((user: UserType) => (
+                        {UserStore.filteredUsers.value.map((user: UserType) => (
                             <tr
                                 key={user.id}
                                 className={`${AppStore.selectedUserId.value === user.id ? 'active' : ''}`}

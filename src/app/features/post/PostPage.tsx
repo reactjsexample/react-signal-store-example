@@ -1,11 +1,15 @@
-// src/app/features/post/PostPage.tsx
-import {type NavigateFunction, useNavigate} from "react-router";
 import * as AppStore from "../../appStore.tsx";
+import {type NavigateFunction, useNavigate} from "react-router";
 import * as PostStore from "./postStore.ts";
 import type {PostType} from "./postTypes.ts";
 import {useEffect} from "react";
 import {useSignals} from "@preact/signals-react/runtime";
+import Search from "../../shared/search/Search.tsx";
 
+/**
+ * PostPage is the Posts page
+ * @constructor useSignals connects to any referenced Signal Store
+ */
 function PostPage() {
     useEffect(() => {
         AppStore.setSelectedPage('post');
@@ -16,15 +20,32 @@ function PostPage() {
 
     const navigate: NavigateFunction = useNavigate(); // initialize the navigate function
 
-    function handleRowClick(id: number) {
+    function handleRowClick(id: string) {
         PostStore.setSelectedPostId(id);
         navigate("/post-edit");
     }
 
+    function handleSearchOptionChange(event: { target: { value: string; }; }) {
+        const value: string = event.target.value;
+        PostStore.setSelectedSearchOptionValue(value);
+    }
+
+    function handleSearchTextChange(event: { target: { value: string; }; }) {
+        const value: string = event.target.value;
+        PostStore.setSearchText(value);
+    }
+
     return (
         <main>
-            <section>
+            <section className="flex justify-between">
                 <h2>Posts</h2>
+                <Search
+                    dropdownOptions={PostStore.searchOptions.value}
+                    onSearchOptionChange={handleSearchOptionChange}
+                    onSearchTextChange={handleSearchTextChange}
+                    searchText={PostStore.searchText.value}
+                    selectedValue={PostStore.selectedSearchOptionValue.value}
+                />
             </section>
 
             {AppStore.isNoSelectedUser.value && (
@@ -59,7 +80,7 @@ function PostPage() {
                         </tr>
                         </thead>
                         <tbody>
-                        {PostStore.posts.value.map((post: PostType) => (
+                        {PostStore.filteredPosts.value.map((post: PostType) => (
                             <tr
                                 key={post.id}
                                 className={`${PostStore.selectedPost.value?.id === post.id ? 'active' : ''}`}

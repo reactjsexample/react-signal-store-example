@@ -1,16 +1,33 @@
+import type {DropdownOption} from "../../appTypes.tsx";
+
 export interface PostType {
+  [key: string]: string; // Allows any string key
   body: string;
-  id: number;
+  id: string;
   title: string;
-  userId: number;
+  userId: string;
 }
+
+const postInitialSearchDropdownOptions: DropdownOption[] = [
+  {
+    label: "Title",
+    value: "title",
+  },
+  {
+    label: "Body",
+    value: "body",
+  }
+];
 
 export const postInitialState: PostState = {
   isError: false,
   isLoading: false,
   newPost: undefined,
   posts: [],
+  searchOptions: postInitialSearchDropdownOptions,
+  searchText: "",
   selectedPostId: undefined,
+  selectedSearchOptionValue: "title",
   postUserId: undefined,
 };
 
@@ -19,6 +36,9 @@ export interface PostState {
   isLoading: boolean;
   newPost?: PostType;
   posts: PostType[];
-  selectedPostId?: number;
-  postUserId?: number;
+  searchOptions: DropdownOption[];
+  searchText: string;
+  selectedPostId?: string;
+  selectedSearchOptionValue: string;
+  postUserId?: string;
 }

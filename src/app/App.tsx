@@ -1,16 +1,16 @@
-import './app.css';
-import MyHeader from "./app/shared/Header";
-import HomePage from "./app/features/home/HomePage.tsx";
-import PostEditPage from "./app/features/post/post-edit/PostEditPage.tsx";
-import PostPage from "./app/features/post/PostPage.tsx";
+import "./app.css";
+import Header from "./shared/Header.tsx";
+import HomePage from "./features/home/HomePage.tsx";
+import PostEditPage from "./features/post/post-edit/PostEditPage.tsx";
+import PostPage from "./features/post/PostPage.tsx";
 import {Route, Routes} from "react-router";
-import UserPage from "./app/features/user/UserPage.tsx";
+import UserPage from "./features/user/UserPage.tsx";
 
 function App() {
 
     return (
         <div>
-            <MyHeader></MyHeader>
+            <Header></Header>
             <Routes>
                 {/* 'element' prop replaces child components */}
                 <Route path="/" element={<HomePage/>}/>
