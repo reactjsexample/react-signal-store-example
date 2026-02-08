@@ -1,7 +1,12 @@
 {
   "name": "react-signal-store-example",
+  "description": "React Signal Store Example. State Management using Signals in React.",
+  "author": {
+    "name": "JC Lango",
+    "email": "info@reactjs-example.com"
+  },
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
