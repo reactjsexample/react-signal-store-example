@@ -37,8 +37,15 @@ function PostPage() {
 
     return (
         <main>
-            <section>
+            <section className="flex justify-between">
                 <h2>Posts</h2>
+                <Search
+                    dropdownOptions={PostStore.searchOptions.value}
+                    onSearchOptionChange={handleSearchOptionChange}
+                    onSearchTextChange={handleSearchTextChange}
+                    searchText={PostStore.searchText.value}
+                    selectedValue={PostStore.selectedSearchOptionValue.value}
+                />
             </section>
 
             {AppStore.isNoSelectedUser.value && (
@@ -63,15 +70,6 @@ function PostPage() {
             {PostStore.isLoaded.value && (
                 <section>
                     <h3>Select a Post to edit</h3>
-                    <div className="ml-auto ml-auto">
-                        <Search
-                            dropdownOptions={PostStore.searchOptions.value}
-                            onSearchOptionChange={handleSearchOptionChange}
-                            onSearchTextChange={handleSearchTextChange}
-                            searchText={PostStore.searchText.value}
-                            selectedValue={PostStore.selectedSearchOptionValue.value}
-                        />
-                    </div>
                     <p>User Id: {AppStore.selectedUserId.value}</p>
                     <table className="data-table">
                         <thead>

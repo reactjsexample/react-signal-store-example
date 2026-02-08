@@ -38,17 +38,15 @@ function UserPage() {
 
     return (
         <main>
-            <section>
+            <section className="flex justify-between">
                 <h2>Users</h2>
-                <div className="ml-auto ml-auto">
-                    <Search
-                        dropdownOptions={UserStore.searchOptions.value}
-                        onSearchOptionChange={handleSearchOptionChange}
-                        onSearchTextChange={handleSearchTextChange}
-                        searchText={UserStore.searchText.value}
-                        selectedValue={UserStore.selectedSearchOptionValue.value}
-                    />
-                </div>
+                <Search
+                    dropdownOptions={UserStore.searchOptions.value}
+                    onSearchOptionChange={handleSearchOptionChange}
+                    onSearchTextChange={handleSearchTextChange}
+                    searchText={UserStore.searchText.value}
+                    selectedValue={UserStore.selectedSearchOptionValue.value}
+                />
             </section>
 
             {UserStore.isUsersLoading.value && (
