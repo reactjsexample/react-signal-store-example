@@ -11,7 +11,8 @@ type SearchProps = {
 
 function Search ({dropdownOptions, onSearchOptionChange, onSearchTextChange, searchText,  selectedValue} : SearchProps){
     return (
-        <div>
+        <div className="flex w-full justify-end gap-2 items-center">
+            <label>Search by:</label>
             <SearchDropdown
                 dropdownOptions={dropdownOptions}
                 onSearchOptionChange={onSearchOptionChange}
