@@ -10,7 +10,7 @@ function SearchDropdown ({dropdownOptions, onSearchOptionChange, selectedValue} 
     return (
         <div>
             <select
-                className="bg-[whitee] border border-solid border-[black] p-1"
+                className="bg-[whitee] border border-solid border-[black] px-1 py-2"
                 value={selectedValue}
                 onChange={onSearchOptionChange}
             >

@@ -13,8 +13,8 @@ type SearchProps = {
 
 function Search({dropdownOptions, onSearchOptionChange, onSearchTextChange, searchText, selectedValue}: SearchProps) {
     return (
-        <div className="flex w-full justify-end gap-2 items-center">
-            <label>Search by:</label>
+        <div className="flex justify-end gap-2 items-center">
+            <label className="whitespace-nowrap">Search by:</label>
             <SearchDropdown
                 dropdownOptions={dropdownOptions}
                 onSearchOptionChange={onSearchOptionChange}
