@@ -1,10 +1,10 @@
 import './app.css';
 import MyHeader from "./app/shared/Header";
-import HomePage from "./app/features/home/home-page.tsx";
-import PostEditPage from "./app/features/post/post-edit/post-edit-page.tsx";
-import PostPage from "./app/features/post/post-page.tsx";
+import HomePage from "./app/features/home/HomePage.tsx";
+import PostEditPage from "./app/features/post/post-edit/PostEditPage.tsx";
+import PostPage from "./app/features/post/PostPage.tsx";
 import {Route, Routes} from "react-router";
-import UserPage from "./app/features/user/user-page.tsx";
+import UserPage from "./app/features/user/UserPage.tsx";
 
 function App() {
 

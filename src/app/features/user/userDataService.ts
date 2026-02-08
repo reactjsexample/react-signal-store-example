@@ -1,5 +1,5 @@
-// user-data-service.ts
-import type {UserApiResponse} from "./user-types.tsx";
+// userDataService.ts
+import type {UserApiResponse} from "./userTypes.tsx";
 
 const BASE_URL = 'https://dummyjson.com/users';
 

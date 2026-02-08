@@ -1,5 +1,5 @@
-// src/app/features/home/home-page.tsx
-import * as AppStore from "../../app-store.tsx";
+// src/app/features/home/HomePage.tsx
+import * as AppStore from "../../appStore.tsx";
 import {useEffect} from "react";
 
 function HomePage() {

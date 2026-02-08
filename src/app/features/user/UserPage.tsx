@@ -1,9 +1,9 @@
 // src/pages/HomePage.jsx
-import * as UserStore from "./user-store.tsx";
+import * as UserStore from "./userStore.tsx";
 import {type NavigateFunction, useNavigate} from "react-router";
-import * as AppStore from "../../app-store.tsx";
+import * as AppStore from "../../appStore.tsx";
 import {useEffect} from 'react';
-import type {UserType} from "./user-types.tsx";
+import type {UserType} from "./userTypes.tsx";
 import {useSignals} from "@preact/signals-react/runtime";
 
 function UserPage() {

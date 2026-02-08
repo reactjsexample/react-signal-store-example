@@ -1,10 +1,10 @@
-// src/app/features/post/post-edit/post-edit-page.tsx
+// src/app/features/post/post-edit/PostEditPage.tsx
 
-import * as AppStore from "../../../app-store.tsx";
-import * as PostStore from "../post-store.ts"
+import * as AppStore from "../../../appStore.tsx";
+import * as PostStore from "../postStore.ts"
 import {useEffect} from "react";
 import {useSignals} from "@preact/signals-react/runtime";
-import type {PostType} from "../post-types.ts";
+import type {PostType} from "../postTypes.ts";
 import {type NavigateFunction, useNavigate} from "react-router";
 
 function PostEditPage() {

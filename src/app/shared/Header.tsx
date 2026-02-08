@@ -1,5 +1,5 @@
 import {Link} from "react-router";
-import * as AppStore from "../app-store.tsx";
+import * as AppStore from "../appStore.tsx";
 import {useSignals} from "@preact/signals-react/runtime";
 
 function MyHeader() {

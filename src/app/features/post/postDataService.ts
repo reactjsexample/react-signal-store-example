@@ -1,5 +1,5 @@
-// post-data-service.ts
-import type {PostType} from "./post-types.ts";
+// postDataService.ts
+import type {PostType} from "./postTypes.ts";
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com/posts';
 

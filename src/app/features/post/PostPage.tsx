@@ -1,8 +1,8 @@
-// src/app/features/post/post-page.tsx
+// src/app/features/post/PostPage.tsx
 import {type NavigateFunction, useNavigate} from "react-router";
-import * as AppStore from "../../app-store.tsx";
-import * as PostStore from "./post-store.ts";
-import type {PostType} from "./post-types.ts";
+import * as AppStore from "../../appStore.tsx";
+import * as PostStore from "./postStore.ts";
+import type {PostType} from "./postTypes.ts";
 import {useEffect} from "react";
 import {useSignals} from "@preact/signals-react/runtime";
 

@@ -1,11 +1,11 @@
 /**
  * PostStore is the feature state for the post page.
  */
-import * as AppStore from "../../app-store.tsx";
+import * as AppStore from "../../appStore.tsx";
 import {computed, signal, type Signal} from "@preact/signals-react";
-import {postDataService} from "./post-data-service.ts";
-import {postInitialState, type PostState, type PostType} from "./post-types.ts";
-import {selectedUserId} from "../../app-store.tsx";
+import {postDataService} from "./postDataService.ts";
+import {postInitialState, type PostState, type PostType} from "./postTypes.ts";
+import {selectedUserId} from "../../appStore.tsx";
 
 // State
 // It is a single data object to store all the properties needed to support the view.

@@ -1,6 +1,6 @@
 import {computed, Signal, signal} from '@preact/signals-react';
-import {type UserApiResponse, userInitialState, type UserState, type UserType} from "./user-types.tsx";
-import {userDataService} from "./user-data-service.ts";
+import {type UserApiResponse, userInitialState, type UserState, type UserType} from "./userTypes.tsx";
+import {userDataService} from "./userDataService.ts";
 
 // State
 // It is a single data object to store all the properties needed to support the view.
