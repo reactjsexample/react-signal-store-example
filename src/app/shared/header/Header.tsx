@@ -1,4 +1,4 @@
-import * as AppStore from "../appStore.tsx";
+import * as AppStore from "../../appStore.tsx";
 import {Link} from "react-router";
 import {useSignals} from "@preact/signals-react/runtime";
 
