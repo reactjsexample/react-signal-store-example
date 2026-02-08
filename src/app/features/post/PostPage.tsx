@@ -1,11 +1,15 @@
-// src/app/features/post/PostPage.tsx
-import {type NavigateFunction, useNavigate} from "react-router";
 import * as AppStore from "../../appStore.tsx";
+import {type NavigateFunction, useNavigate} from "react-router";
 import * as PostStore from "./postStore.ts";
 import type {PostType} from "./postTypes.ts";
 import {useEffect} from "react";
 import {useSignals} from "@preact/signals-react/runtime";
+import Search from "../../shared/Search.tsx";
 
+/**
+ * PostPage is the Posts page
+ * @constructor useSignals connects to any referenced Signal Store
+ */
 function PostPage() {
     useEffect(() => {
         AppStore.setSelectedPage('post');
@@ -19,6 +23,16 @@ function PostPage() {
     function handleRowClick(id: number) {
         PostStore.setSelectedPostId(id);
         navigate("/post-edit");
+    }
+
+    function handleSearchOptionChange(event: { target: { value: string; }; }) {
+        const value: string = event.target.value;
+        PostStore.setSelectedSearchOptionValue(value);
+    }
+
+    function handleSearchTextChange(event: { target: { value: string; }; }) {
+        const value: string = event.target.value;
+        PostStore.setSearchText(value);
     }
 
     return (
@@ -49,6 +63,15 @@ function PostPage() {
             {PostStore.isLoaded.value && (
                 <section>
                     <h3>Select a Post to edit</h3>
+                    <div className="ml-auto ml-auto">
+                        <Search
+                            dropdownOptions={PostStore.searchOptions.value}
+                            onSearchOptionChange={handleSearchOptionChange}
+                            onSearchTextChange={handleSearchTextChange}
+                            searchText={PostStore.searchText.value}
+                            selectedValue={PostStore.selectedSearchOptionValue.value}
+                        />
+                    </div>
                     <p>User Id: {AppStore.selectedUserId.value}</p>
                     <table className="data-table">
                         <thead>

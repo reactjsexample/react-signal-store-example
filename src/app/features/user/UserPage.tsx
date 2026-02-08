@@ -1,11 +1,15 @@
-// src/pages/HomePage.jsx
-import * as UserStore from "./userStore.tsx";
-import {type NavigateFunction, useNavigate} from "react-router";
 import * as AppStore from "../../appStore.tsx";
+import {type NavigateFunction, useNavigate} from "react-router";
 import {useEffect} from 'react';
+import * as UserStore from "./userStore.tsx";
 import type {UserType} from "./userTypes.tsx";
 import {useSignals} from "@preact/signals-react/runtime";
+import Search from "../../shared/Search.tsx";
 
+/**
+ * UserPage is the Users page
+ * @constructor useSignals connects to any referenced Signal Store
+ */
 function UserPage() {
     useEffect(() => {
         AppStore.setSelectedPage('user');
@@ -21,6 +25,16 @@ function UserPage() {
         AppStore.setSelectedUserId(userId);
         navigate("/post");
     };
+
+    function handleSearchOptionChange(event: { target: { value: string; }; }) {
+        const value: string = event.target.value;
+        UserStore.setSelectedSearchOptionValue(value);
+    }
+
+    function handleSearchTextChange(event: { target: { value: string; }; }) {
+        const value: string = event.target.value;
+        UserStore.setSearchText(value);
+    }
 
     return (
         <main>
@@ -43,6 +57,15 @@ function UserPage() {
             {UserStore.isUsersLoaded.value && (
                 <section>
                     <h3>Select a User to see Posts</h3>
+                        <div className="ml-auto ml-auto">
+                            <Search
+                                dropdownOptions={UserStore.searchOptions.value}
+                                onSearchOptionChange={handleSearchOptionChange}
+                                onSearchTextChange={handleSearchTextChange}
+                                searchText={UserStore.searchText.value}
+                                selectedValue={UserStore.selectedSearchOptionValue.value}
+                            />
+                        </div>
                     <table className="data-table">
                         <thead>
                         <tr>

@@ -1,3 +1,5 @@
+import type {DropdownOption} from "../../appTypes.tsx";
+
 export interface UserType {
     firstName: string;
     id: number;
@@ -12,14 +14,31 @@ export interface UserApiResponse {
     users: UserType[];
 }
 
+const userInitialSearchDropdownOptions: DropdownOption[] = [
+    {
+        label: "First Name",
+        value: "firstname",
+    },
+    {
+        label: "Last Name",
+        value: "lastname",
+    }
+];
+
 export const userInitialState: UserState = {
     isUsersError: false,
     isUsersLoading: false,
+    searchOptions: userInitialSearchDropdownOptions,
+    searchText: "",
+    selectedSearchOptionValue: "lastname",
     users: []
 };
 
 export interface UserState {
     isUsersError: boolean;
     isUsersLoading: boolean;
+    searchOptions: DropdownOption[];
+    searchText: string;
+    selectedSearchOptionValue: string;
     users: UserType[];
 }

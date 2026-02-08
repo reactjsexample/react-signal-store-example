@@ -1,8 +1,9 @@
 /**
- * PostStore is the feature state for the post page.
+ * postStore is the feature state for the post page.
  */
 import * as AppStore from "../../appStore.tsx";
 import {computed, signal, type Signal} from "@preact/signals-react";
+import type {DropdownOption} from "../../appTypes.tsx";
 import {postDataService} from "./postDataService.ts";
 import {postInitialState, type PostState, type PostType} from "./postTypes.ts";
 import {selectedUserId} from "../../appStore.tsx";
@@ -15,23 +16,30 @@ const postState: Signal<PostState> = signal<PostState>(postInitialState);
 // A selector is used to read any data from the state.
 // In a Signal-based state, it is a function that returns a signal.
 // By design, it is the only way to read the state.
-// This version does not use the prefix "select" in the name of the selector.
 
-export const isEmpty: Signal<boolean> = computed(() => !postState.value.isLoading && postState.value.posts.length === 0);
+// state selectors
 export const isError: Signal<boolean> = computed(() => postState.value.isError);
-export const isLoaded: Signal<boolean> = computed(() => postState.value.posts.length > 0);
 export const isLoading: Signal<boolean> = computed(() => postState.value.isLoading);
-export const isNoSelectedPost: Signal<boolean> = computed(() => postState.value.selectedPostId === undefined ||
-    !postState.value.isLoading && postState.value.posts.length === 0);
 export const newPost: Signal<PostType | undefined> = computed(() => postState.value.newPost);
 export const posts: Signal<PostType[]> = computed(() => postState.value.posts);
 export const postUserId: Signal<number | undefined> = computed(() => postState.value.postUserId);
+export const searchOptions: Signal<DropdownOption[]> = computed(() => postState.value.searchOptions);
+export const searchText: Signal<string> = computed(() => postState.value.searchText);
 export const selectedPostId: Signal<number | undefined> = computed(() => postState.value.selectedPostId);
+export const selectedSearchOptionValue: Signal<string> = computed(() => postState.value.selectedSearchOptionValue);
+
+// calculated selectors
+export const isEmpty: Signal<boolean> = computed(() => !isLoading.value && posts.value.length === 0);
+
+export const isLoaded: Signal<boolean> = computed(() => posts.value.length > 0);
+
+export const isNoSelectedPost: Signal<boolean> = computed(() => selectedPostId.value === undefined ||
+    !isLoading.value && posts.value.length === 0);
+
 export const selectedPost: Signal<PostType | undefined> = computed(() => {
     if(isNoSelectedPost.value) return undefined;
     return posts.value.find(post => post.id === selectedPostId.value)
 });
-export const isSelectedPost: Signal<boolean> = computed(() => selectedPost.value !== undefined);
 
 export const isPostFormValid: Signal<boolean> = computed(()=>{
     let isValid = true;
@@ -47,13 +55,16 @@ export const isPostFormValid: Signal<boolean> = computed(()=>{
 })
 
 export const isSaveButtonDisabled: Signal<boolean> = computed(() => (
-    !isLoaded.value
-    || selectedPost.value === undefined
-    || newPost.value === undefined
-    || isPostsEqual(newPost.value, selectedPost.value))
+        !isLoaded.value
+        || selectedPost.value === undefined
+        || newPost.value === undefined
+        || isPostsEqual(newPost.value, selectedPost.value))
     || !isPostFormValid.value
 );
 
+export const isSelectedPost: Signal<boolean> = computed(() => selectedPost.value !== undefined);
+
+// helper functions
 function isPostsEqual(post1: PostType | undefined, post2: PostType | undefined): boolean {
     if (!post1 || !post2) {
         return false;
@@ -112,6 +123,13 @@ export const setNewPost = (post: PostType) => {
         });
 }
 
+export function setSearchText(text: string): void {
+    postState.value = {
+        ...postState.value,
+        searchText: text
+    }
+}
+
 export const setSelectedPostId = (postId: number) => {
     // make sure the post exists
     if (postState.value.posts.some(item => item.id === postId)) {
@@ -124,6 +142,13 @@ export const setSelectedPostId = (postId: number) => {
                 newPost,
                 selectedPostId: postId
             })
+    }
+}
+
+export function setSelectedSearchOptionValue(selectedValue: string): void {
+    postState.value = {
+        ...postState.value,
+        selectedSearchOptionValue: selectedValue
     }
 }
 

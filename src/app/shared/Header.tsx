@@ -1,10 +1,10 @@
-import {Link} from "react-router";
 import * as AppStore from "../appStore.tsx";
+import {Link} from "react-router";
 import {useSignals} from "@preact/signals-react/runtime";
 
-function MyHeader() {
+function Header() {
     useSignals(); // re-render view when signals change
-
+    
     return (
         <div className={"items-center bg-[aquamarine] flex flex-col w-full p-4 gap-4"}>
             <div>
@@ -32,4 +32,4 @@ function MyHeader() {
     )
 }
 
-export default MyHeader;
+export default Header;

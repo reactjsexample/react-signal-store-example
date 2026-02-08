@@ -1,4 +1,8 @@
+/**
+ * userStore is the feature state for the post page.
+ */
 import {computed, Signal, signal} from '@preact/signals-react';
+import type {DropdownOption} from "../../appTypes.tsx";
 import {type UserApiResponse, userInitialState, type UserState, type UserType} from "./userTypes.tsx";
 import {userDataService} from "./userDataService.ts";
 
@@ -12,12 +16,14 @@ const userState: Signal<UserState> = signal<UserState>(userInitialState);
 // By design, it is the only way to read the state.
 export const isUsersError: Signal<boolean> = computed(() => userState.value.isUsersError);
 export const isUsersLoading: Signal<boolean> = computed(() => userState.value.isUsersLoading);
+export const searchOptions: Signal<DropdownOption[]> = computed(() => userState.value.searchOptions);
+export const searchText: Signal<string> = computed(() => userState.value.searchText);
+export const selectedSearchOptionValue: Signal<string> = computed(() => userState.value.selectedSearchOptionValue);
 export const users: Signal<UserType[]> = computed(() => userState.value.users);
 
 // calculated selectors
 export const isUsersLoaded: Signal<boolean> = computed(() => !isUsersLoading.value && users.value.length > 0);
 export const isUsersEmpty: Signal<boolean> = computed(() => !isUsersLoading.value && users.value.length === 0);
-
 
 // Actions
 // An action is a method that will update the state and or change the view or behavior.
@@ -49,6 +55,20 @@ const getUsers = (): void => {
             };
     }
 };
+
+export function setSearchText(text: string): void {
+    userState.value = {
+        ...userState.value,
+        searchText: text
+    }
+}
+
+export function setSelectedSearchOptionValue(selectedValue: string): void {
+    userState.value = {
+        ...userState.value,
+        selectedSearchOptionValue: selectedValue
+    }
+}
 
 export function showUsers(): void {
     if (!isUsersLoaded.value && !isUsersLoading.value) {
