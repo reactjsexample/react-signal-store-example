@@ -20,7 +20,7 @@ function PostPage() {
 
     const navigate: NavigateFunction = useNavigate(); // initialize the navigate function
 
-    function handleRowClick(id: number) {
+    function handleRowClick(id: string) {
         PostStore.setSelectedPostId(id);
         navigate("/post-edit");
     }
@@ -82,7 +82,7 @@ function PostPage() {
                         </tr>
                         </thead>
                         <tbody>
-                        {PostStore.posts.value.map((post: PostType) => (
+                        {PostStore.filteredPosts.value.map((post: PostType) => (
                             <tr
                                 key={post.id}
                                 className={`${PostStore.selectedPost.value?.id === post.id ? 'active' : ''}`}

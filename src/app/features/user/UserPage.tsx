@@ -20,7 +20,7 @@ function UserPage() {
 
     const navigate: NavigateFunction = useNavigate(); // initialize the navigate function
 
-    const handleRowClick = (userId: number) => {
+    const handleRowClick = (userId: string) => {
         // navigate to the user details page
         AppStore.setSelectedUserId(userId);
         navigate("/post");
@@ -40,6 +40,15 @@ function UserPage() {
         <main>
             <section>
                 <h2>Users</h2>
+                <div className="ml-auto ml-auto">
+                    <Search
+                        dropdownOptions={UserStore.searchOptions.value}
+                        onSearchOptionChange={handleSearchOptionChange}
+                        onSearchTextChange={handleSearchTextChange}
+                        searchText={UserStore.searchText.value}
+                        selectedValue={UserStore.selectedSearchOptionValue.value}
+                    />
+                </div>
             </section>
 
             {UserStore.isUsersLoading.value && (
@@ -57,15 +66,6 @@ function UserPage() {
             {UserStore.isUsersLoaded.value && (
                 <section>
                     <h3>Select a User to see Posts</h3>
-                        <div className="ml-auto ml-auto">
-                            <Search
-                                dropdownOptions={UserStore.searchOptions.value}
-                                onSearchOptionChange={handleSearchOptionChange}
-                                onSearchTextChange={handleSearchTextChange}
-                                searchText={UserStore.searchText.value}
-                                selectedValue={UserStore.selectedSearchOptionValue.value}
-                            />
-                        </div>
                     <table className="data-table">
                         <thead>
                         <tr>
@@ -75,7 +75,7 @@ function UserPage() {
                         </tr>
                         </thead>
                         <tbody>
-                        {UserStore.users.value.map((user: UserType) => (
+                        {UserStore.filteredUsers.value.map((user: UserType) => (
                             <tr
                                 key={user.id}
                                 className={`${AppStore.selectedUserId.value === user.id ? 'active' : ''}`}

@@ -4,7 +4,7 @@ import type {PostType} from "./postTypes.ts";
 const BASE_URL = 'https://jsonplaceholder.typicode.com/posts';
 
 export const postDataService = {
-  getPosts: async (userId: number): Promise<PostType[]> => {
+  getPosts: async (userId: string): Promise<PostType[]> => {
     const postUrl = `${BASE_URL}?userId=${userId}`;
     const response = await fetch(postUrl);
     if (!response.ok) {

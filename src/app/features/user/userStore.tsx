@@ -22,8 +22,21 @@ export const selectedSearchOptionValue: Signal<string> = computed(() => userStat
 export const users: Signal<UserType[]> = computed(() => userState.value.users);
 
 // calculated selectors
-export const isUsersLoaded: Signal<boolean> = computed(() => !isUsersLoading.value && users.value.length > 0);
-export const isUsersEmpty: Signal<boolean> = computed(() => !isUsersLoading.value && users.value.length === 0);
+export const filteredUsers: Signal<UserType[]> = computed(() => {
+    const filteredUsers: UserType[] = [...users.value];
+    if (!filteredUsers.length) return [];
+    const key: string = selectedSearchOptionValue.value;
+    const user: UserType = filteredUsers[0];
+    if (Object.hasOwn(user, key) && searchText.value.length > 0) {
+        return userState.value.users.filter((user: UserType) => user[key].toLowerCase().includes(searchText.value));
+    }
+    return filteredUsers;
+});
+
+export const isUsersEmpty: Signal<boolean> = computed(() => !isUsersError.value && !isUsersLoading.value && filteredUsers.value.length === 0);
+
+export const isUsersLoaded: Signal<boolean> = computed(() => !isUsersLoading.value && !isUsersError.value && filteredUsers.value.length > 0);
+
 
 // Actions
 // An action is a method that will update the state and or change the view or behavior.
@@ -59,13 +72,14 @@ const getUsers = (): void => {
 export function setSearchText(text: string): void {
     userState.value = {
         ...userState.value,
-        searchText: text
+        searchText: text.toLowerCase()
     }
 }
 
 export function setSelectedSearchOptionValue(selectedValue: string): void {
     userState.value = {
         ...userState.value,
+        searchText: "",
         selectedSearchOptionValue: selectedValue
     }
 }

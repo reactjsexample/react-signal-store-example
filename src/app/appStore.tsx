@@ -14,7 +14,7 @@ const appState: Signal<AppState> = signal<AppState>(appInitialState);
 export const selectedPage: Signal<Page> = computed(() => appState.value.selectedPage);
 
 // calculated selectors
-export const selectedUserId: Signal<number | undefined> = computed(() => appState.value.selectedUserId ? appState.value.selectedUserId : undefined);
+export const selectedUserId: Signal<string | undefined> = computed(() => appState.value.selectedUserId ? appState.value.selectedUserId : undefined);
 export const isNoSelectedUser: Signal<boolean> = computed(() => selectedUserId.value === undefined);
 
 // Actions
@@ -28,7 +28,7 @@ export function setSelectedPage(page: Page): void {
         };
 }
 
-export function setSelectedUserId(userId: number): void {
+export function setSelectedUserId(userId: string): void {
     appState.value =
         {
             ...appState.value,

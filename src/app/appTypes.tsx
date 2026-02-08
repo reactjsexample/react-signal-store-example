@@ -12,5 +12,5 @@ export const appInitialState: AppState = {
 
 export interface AppState {
     selectedPage: Page;
-    selectedUserId: number | undefined;
+    selectedUserId: string | undefined;
 }

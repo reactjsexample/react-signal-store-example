@@ -1,10 +1,11 @@
 import type {DropdownOption} from "../../appTypes.tsx";
 
 export interface PostType {
+  [key: string]: string; // Allows any string key
   body: string;
-  id: number;
+  id: string;
   title: string;
-  userId: number;
+  userId: string;
 }
 
 const postInitialSearchDropdownOptions: DropdownOption[] = [
@@ -37,7 +38,7 @@ export interface PostState {
   posts: PostType[];
   searchOptions: DropdownOption[];
   searchText: string;
-  selectedPostId?: number;
+  selectedPostId?: string;
   selectedSearchOptionValue: string;
-  postUserId?: number;
+  postUserId?: string;
 }
