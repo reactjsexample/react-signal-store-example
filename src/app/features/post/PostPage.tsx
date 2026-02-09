@@ -3,9 +3,9 @@ import {MessageCard} from "../../shared/message-card/MessageCard.tsx";
 import {type NavigateFunction, useNavigate} from "react-router";
 import * as PostStore from "./postStore.ts";
 import type {PostType} from "./postTypes.ts";
+import SearchControl from "../../shared/search-control/SearchControl.tsx";
 import {useEffect} from "react";
 import {useSignals} from "@preact/signals-react/runtime";
-import Search from "../../shared/search/Search.tsx";
 
 /**
  * PostPage is the Posts page
@@ -40,7 +40,7 @@ function PostPage() {
         <main>
             <section className="flex justify-between">
                 <h2>Posts</h2>
-                <Search
+                <SearchControl
                     dropdownOptions={PostStore.searchOptions.value}
                     onSearchOptionChange={handleSearchOptionChange}
                     onSearchTextChange={handleSearchTextChange}

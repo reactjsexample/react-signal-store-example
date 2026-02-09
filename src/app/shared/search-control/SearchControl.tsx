@@ -1,6 +1,6 @@
 import type {DropdownOption} from "../../appTypes.tsx";
 import {FaSearch} from 'react-icons/fa';
-import "./search.css";
+import "./searchControl.css";
 import SearchDropdown from "./SearchDropdown.tsx";
 
 type SearchProps = {
@@ -11,7 +11,7 @@ type SearchProps = {
     selectedValue: string;
 }
 
-function Search({dropdownOptions, onSearchOptionChange, onSearchTextChange, searchText, selectedValue}: SearchProps) {
+function SearchControl({dropdownOptions, onSearchOptionChange, onSearchTextChange, searchText, selectedValue}: SearchProps) {
     return (
         <div className="flex justify-end gap-2 items-center">
             <label className="whitespace-nowrap">Search by:</label>
@@ -33,4 +33,4 @@ function Search({dropdownOptions, onSearchOptionChange, onSearchTextChange, sear
     );
 }
 
-export default Search;
+export default SearchControl;

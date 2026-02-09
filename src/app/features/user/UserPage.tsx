@@ -1,11 +1,11 @@
 import * as AppStore from "../../appStore.tsx";
 import {MessageCard} from "../../shared/message-card/MessageCard.tsx";
 import {type NavigateFunction, useNavigate} from "react-router";
+import SearchControl from "../../shared/search-control/SearchControl.tsx";
 import {useEffect} from 'react';
 import * as UserStore from "./userStore.tsx";
 import type {UserType} from "./userTypes.tsx";
 import {useSignals} from "@preact/signals-react/runtime";
-import Search from "../../shared/search/Search.tsx";
 
 /**
  * UserPage is the Users page
@@ -41,7 +41,7 @@ function UserPage() {
         <main>
             <section className="flex justify-between">
                 <h2>Users</h2>
-                <Search
+                <SearchControl
                     dropdownOptions={UserStore.searchOptions.value}
                     onSearchOptionChange={handleSearchOptionChange}
                     onSearchTextChange={handleSearchTextChange}
