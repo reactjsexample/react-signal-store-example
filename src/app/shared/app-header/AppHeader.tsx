@@ -2,7 +2,7 @@ import * as AppStore from "../../appStore.tsx";
 import {NavBar} from "../nav-bar/NavBar.tsx";
 import {useSignals} from "@preact/signals-react/runtime";
 
-function Header() {
+function AppHeader() {
     useSignals(); // re-render view when signals change
     
     return (
@@ -15,4 +15,4 @@ function Header() {
     )
 }
 
-export default Header;
+export default AppHeader;

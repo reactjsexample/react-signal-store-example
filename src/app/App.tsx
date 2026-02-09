@@ -1,5 +1,5 @@
 import "./app.css";
-import Header from "./shared/header/Header.tsx";
+import AppHeader from "./shared/app-header/AppHeader.tsx";
 import HomePage from "./features/home/HomePage.tsx";
 import PostEditPage from "./features/post/post-edit/PostEditPage.tsx";
 import PostPage from "./features/post/PostPage.tsx";
@@ -10,7 +10,7 @@ function App() {
 
     return (
         <div>
-            <Header></Header>
+            <AppHeader></AppHeader>
             <Routes>
                 {/* 'element' prop replaces child components */}
                 <Route path="/" element={<HomePage/>}/>
