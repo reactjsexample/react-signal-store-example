@@ -52,7 +52,10 @@ export const isNoSelectedPost: Signal<boolean> = computed(() =>
     && selectedPostId.value === undefined);
 
 export const isPostsLoaded: Signal<boolean> = computed(() =>
-    filteredPosts.value.length > 0);
+    !AppStore.isNoSelectedUser.value
+    && !isPostsLoading.value
+    && !isPostsError.value
+    && filteredPosts.value.length > 0);
 
 export const selectedPost: Signal<PostType | undefined> = computed(() => {
     if(isNoSelectedPost.value) return undefined;
@@ -232,6 +235,7 @@ export function onSetSelectedUserId(): void {
             ...postState.value,
             newPost: undefined,
             postUserId: undefined,
+            searchText: "",
             selectedPostId: undefined,
         });
 }
