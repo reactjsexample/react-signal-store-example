@@ -1,3 +1,4 @@
+/* layout */
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
@@ -8,6 +9,7 @@ main {
     padding: 0.5rem 2rem 2rem;
 }
 
+/* fonts */
 h1 {
     font-size: 2rem;
     font-weight: bold;
@@ -22,6 +24,7 @@ h3 {
     font-size: 1.5rem;
 }
 
+/* table */
 table.data-table {
     border-collapse: collapse;
     margin: 1rem;
@@ -56,14 +59,8 @@ table.data-table {
     }
 }
 
-li {
-    padding: 0.25rem;
-}
 
-li.active {
-    background-color: lightcyan;
-}
-
+/* forms */
 .form-grid-container {
     background-color: lightcyan;
     padding: 1rem;

@@ -1,0 +1,11 @@
+li.active {
+    background-color: lightcyan;
+}
+
+li:not(.active):hover  {
+    background-color: white;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+}
