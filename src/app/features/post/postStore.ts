@@ -42,29 +42,18 @@ export const filteredPosts: Signal<PostType[]> = computed(() => {
     return theFilteredPosts;
 });
 
-export const isPostSaveLoaded: Signal<boolean> = computed(() =>
-    !AppStore.isNoSelectedUser.value
-    && (!isPostSaveLoading.value
-    && !isPostsError.value
-    && posts.value.length > 0));
-
 export const isPostsEmpty: Signal<boolean> = computed(() =>
     !AppStore.isNoSelectedUser.value
     && (!isPostsLoading.value
     && !isPostsError.value
-    && posts.value.length === 0));
-
-export const isPostsLoaded: Signal<boolean> = computed(() =>
-    !AppStore.isNoSelectedUser.value
-    && (!isPostsLoading.value
-    && !isPostsError.value
-    && posts.value.length > 0));
+    && filteredPosts.value.length === 0));
 
 export const isNoSelectedPost: Signal<boolean> = computed(() =>
     !AppStore.isNoSelectedUser.value
-    && (selectedPostId.value === undefined
-    || !isPostsLoading.value
-    && posts.value.length === 0));
+    && selectedPostId.value === undefined);
+
+export const isPostsLoaded: Signal<boolean> = computed(() =>
+    filteredPosts.value.length > 0);
 
 export const selectedPost: Signal<PostType | undefined> = computed(() => {
     if(isNoSelectedPost.value) return undefined;

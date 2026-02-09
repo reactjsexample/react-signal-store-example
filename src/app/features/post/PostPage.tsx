@@ -63,7 +63,7 @@ function PostPage() {
             )}
 
             {PostStore.isPostsEmpty.value && (
-                <MessageCard variant="info" messageText="None found."/>
+                <MessageCard variant="info" messageText="None found. Try a different user, or different search text."/>
             )}
 
             {PostStore.isPostsLoaded.value && (
