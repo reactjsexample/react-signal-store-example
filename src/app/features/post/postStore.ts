@@ -55,6 +55,8 @@ export const isPostsLoaded: Signal<boolean> = computed(() =>
     !AppStore.isNoSelectedUser.value
     && !isPostsLoading.value
     && !isPostsError.value
+    && !isPostSaveLoading.value
+    && !isPostSaveError.value
     && filteredPosts.value.length > 0);
 
 export const selectedPost: Signal<PostType | undefined> = computed(() => {
@@ -103,6 +105,8 @@ const getPosts = () => {
     postState.value = (
         ({
             ...postState.value,
+            isPostSaveError: false,
+            isPostSaveLoading: false,
             isPostsError: false,
             isPostsLoading: true,
             posts: [],
@@ -117,7 +121,6 @@ const getPosts = () => {
                 postState.value =
                     ({
                         ...postState.value,
-                        isPostsError: false,
                         isPostsLoading: false,
                         posts
                     });
@@ -194,6 +197,8 @@ export const updatePost = (): void => {
         ...postState.value,
         isPostSaveError: false,
         isPostSaveLoading: true,
+        isPostsError: false,
+        isPostsLoading: false,
     };
 
     try {

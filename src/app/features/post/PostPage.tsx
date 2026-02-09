@@ -55,11 +55,19 @@ function PostPage() {
             )}
 
             {PostStore.isPostsLoading.value && (
-                <MessageCard variant="info" messageText="Loading..."/>
+                <MessageCard variant="info" messageText="Loading. Please wait..."/>
+            )}
+
+            {PostStore.isPostSaveLoading.value && (
+                <MessageCard variant="info" messageText="Updating data. Please wait..."/>
             )}
 
             {PostStore.isPostsError.value && (
-                <MessageCard variant="error" messageText="Error in data access."/>
+                <MessageCard variant="error" messageText="Error getting posts."/>
+            )}
+
+            {PostStore.isPostSaveError.value && (
+                <MessageCard variant="error" messageText="Error saving post."/>
             )}
 
             {PostStore.isPostsEmpty.value && (
