@@ -6,7 +6,6 @@ import {computed, signal, type Signal} from "@preact/signals-react";
 import type {DropdownOption} from "../../appTypes.tsx";
 import {postDataService} from "./postDataService.ts";
 import {postInitialState, type PostState, type PostType} from "./postTypes.ts";
-import {selectedUserId} from "../../appStore.tsx";
 
 // State
 // It is a single data object to store all the properties needed to support the view.
@@ -97,20 +96,20 @@ function isPostsEqual(post1: PostType | undefined, post2: PostType | undefined):
 // Actions
 // An action is a method that will update the state and or change the view or behavior.
 const getPosts = () => {
-    if (selectedUserId.value === undefined) return;
+    if (AppStore.selectedUserId.value === undefined) return;
     postState.value = (
         ({
             ...postState.value,
             isPostsError: false,
             isPostsLoading: true,
             posts: [],
-            postUserId: selectedUserId.value,
+            postUserId: AppStore.selectedUserId.value,
             selectedPostId: undefined,
         })
     );
 
     try {
-        postDataService.getPosts(selectedUserId.value)
+        postDataService.getPosts(AppStore.selectedUserId.value)
             .then((posts: PostType[]) => {
                 postState.value =
                     ({
@@ -224,4 +223,15 @@ export const updatePost = (): void => {
                 isPostSaveLoading: false,
             });
     }
+
+}
+
+export function onSetSelectedUserId(): void {
+    postState.value =
+        ({
+            ...postState.value,
+            newPost: undefined,
+            postUserId: undefined,
+            selectedPostId: undefined,
+        });
 }

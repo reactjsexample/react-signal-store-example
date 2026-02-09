@@ -1,5 +1,6 @@
 import {appInitialState, type AppState, type Page} from "./appTypes.tsx";
 import {computed, Signal, signal} from '@preact/signals-react';
+import * as PostStore from "./features/post/postStore.ts";
 
 // State
 // It is a single data object to store all the properties needed to support the view.
@@ -34,4 +35,5 @@ export function setSelectedUserId(userId: string): void {
             ...appState.value,
             selectedUserId: userId
         };
+    PostStore.onSetSelectedUserId();
 }
