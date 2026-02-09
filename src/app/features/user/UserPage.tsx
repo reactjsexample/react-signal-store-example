@@ -1,4 +1,5 @@
 import * as AppStore from "../../appStore.tsx";
+import {MessageCard} from "../../shared/message-card/MessageCard.tsx";
 import {type NavigateFunction, useNavigate} from "react-router";
 import {useEffect} from 'react';
 import * as UserStore from "./userStore.tsx";
@@ -50,15 +51,15 @@ function UserPage() {
             </section>
 
             {UserStore.isUsersLoading.value && (
-                <p>Loading...</p>
+                <MessageCard variant="info" messageText="Loading..."/>
             )}
 
             {UserStore.isUsersError.value && (
-                <p>Error getting data.</p>
+                <MessageCard variant="error" messageText="Error during data access."/>
             )}
 
             {UserStore.isUsersEmpty.value && (
-                <p>None found.</p>
+                <MessageCard variant="info" messageText="None foun."/>
             )}
 
             {UserStore.isUsersLoaded.value && (

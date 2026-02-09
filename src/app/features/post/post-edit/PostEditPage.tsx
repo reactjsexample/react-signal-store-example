@@ -6,6 +6,7 @@ import {useEffect} from "react";
 import {useSignals} from "@preact/signals-react/runtime";
 import type {PostType} from "../postTypes.ts";
 import {type NavigateFunction, useNavigate} from "react-router";
+import {MessageCard} from "../../../shared/message-card/MessageCard.tsx";
 
 function PostEditPage() {
     useEffect(() => {
@@ -42,29 +43,13 @@ function PostEditPage() {
             </section>
 
             {AppStore.isNoSelectedUser.value && (
-                <>
-                    <div>There is no selected user.</div>
-                    <div>Go to Users page to select a user.</div>
-                </>
+                <MessageCard variant="info"
+                             messageText="There is no selected user. Go to Users page to select."/>
             )}
 
             {PostStore.isNoSelectedPost.value && (
-                <>
-                    <div>There is no selected post.</div>
-                    <div>Go to Posts page to select a post.</div>
-                </>
-            )}
-
-            {PostStore.isLoading.value && (
-                <p>Loading...</p>
-            )}
-
-            {PostStore.isError.value && (
-                <p>Error getting data.</p>
-            )}
-
-            {PostStore.isEmpty.value && (
-                <p>None found.</p>
+                <MessageCard variant="info"
+                             messageText="There is no selected post. Go to Posts page to select."/>
             )}
 
             {PostStore.isSelectedPost.value && (

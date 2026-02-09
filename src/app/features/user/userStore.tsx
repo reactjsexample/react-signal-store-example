@@ -33,7 +33,7 @@ export const filteredUsers: Signal<UserType[]> = computed(() => {
     return filteredUsers;
 });
 
-export const isUsersEmpty: Signal<boolean> = computed(() => !isUsersError.value && !isUsersLoading.value && filteredUsers.value.length === 0);
+export const isUsersEmpty: Signal<boolean> = computed(() =>  !isUsersLoading.value && !isUsersError.value && filteredUsers.value.length === 0);
 
 export const isUsersLoaded: Signal<boolean> = computed(() => !isUsersLoading.value && !isUsersError.value && filteredUsers.value.length > 0);
 

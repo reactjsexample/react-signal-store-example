@@ -20,8 +20,10 @@ const postInitialSearchDropdownOptions: DropdownOption[] = [
 ];
 
 export const postInitialState: PostState = {
-  isError: false,
-  isLoading: false,
+  isPostsError: false,
+  isPostsLoading: false,
+  isPostSaveError: false,
+  isPostSaveLoading: false,
   newPost: undefined,
   posts: [],
   searchOptions: postInitialSearchDropdownOptions,
@@ -32,8 +34,10 @@ export const postInitialState: PostState = {
 };
 
 export interface PostState {
-  isError: boolean;
-  isLoading: boolean;
+  isPostsError: boolean;
+  isPostsLoading: boolean;
+  isPostSaveError: boolean;
+  isPostSaveLoading: boolean;
   newPost?: PostType;
   posts: PostType[];
   searchOptions: DropdownOption[];

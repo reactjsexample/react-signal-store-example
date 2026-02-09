@@ -18,8 +18,10 @@ const postState: Signal<PostState> = signal<PostState>(postInitialState);
 // By design, it is the only way to read the state.
 
 // state selectors
-export const isError: Signal<boolean> = computed(() => postState.value.isError);
-export const isLoading: Signal<boolean> = computed(() => postState.value.isLoading);
+export const isPostSaveError: Signal<boolean> = computed(()=> postState.value.isPostSaveError);
+export const isPostSaveLoading: Signal<boolean> = computed(()=> postState.value.isPostSaveLoading);
+export const isPostsError: Signal<boolean> = computed(() => postState.value.isPostsError);
+export const isPostsLoading: Signal<boolean> = computed(() => postState.value.isPostsLoading);
 export const newPost: Signal<PostType | undefined> = computed(() => postState.value.newPost);
 export const posts: Signal<PostType[]> = computed(() => postState.value.posts);
 export const postUserId: Signal<string | undefined> = computed(() => postState.value.postUserId);
@@ -40,12 +42,29 @@ export const filteredPosts: Signal<PostType[]> = computed(() => {
     return theFilteredPosts;
 });
 
-export const isEmpty: Signal<boolean> = computed(() => !isLoading.value && posts.value.length === 0);
+export const isPostSaveLoaded: Signal<boolean> = computed(() =>
+    !AppStore.isNoSelectedUser.value
+    && (!isPostSaveLoading.value
+    && !isPostsError.value
+    && posts.value.length > 0));
 
-export const isLoaded: Signal<boolean> = computed(() => posts.value.length > 0);
+export const isPostsEmpty: Signal<boolean> = computed(() =>
+    !AppStore.isNoSelectedUser.value
+    && (!isPostsLoading.value
+    && !isPostsError.value
+    && posts.value.length === 0));
 
-export const isNoSelectedPost: Signal<boolean> = computed(() => selectedPostId.value === undefined ||
-    !isLoading.value && posts.value.length === 0);
+export const isPostsLoaded: Signal<boolean> = computed(() =>
+    !AppStore.isNoSelectedUser.value
+    && (!isPostsLoading.value
+    && !isPostsError.value
+    && posts.value.length > 0));
+
+export const isNoSelectedPost: Signal<boolean> = computed(() =>
+    !AppStore.isNoSelectedUser.value
+    && (selectedPostId.value === undefined
+    || !isPostsLoading.value
+    && posts.value.length === 0));
 
 export const selectedPost: Signal<PostType | undefined> = computed(() => {
     if(isNoSelectedPost.value) return undefined;
@@ -66,7 +85,7 @@ export const isPostFormValid: Signal<boolean> = computed(()=>{
 })
 
 export const isSaveButtonDisabled: Signal<boolean> = computed(() => (
-        !isLoaded.value
+        !isPostsLoaded.value
         || selectedPost.value === undefined
         || newPost.value === undefined
         || isPostsEqual(newPost.value, selectedPost.value))
@@ -93,8 +112,8 @@ const getPosts = () => {
     postState.value = (
         ({
             ...postState.value,
-            isError: false,
-            isLoading: true,
+            isPostsError: false,
+            isPostsLoading: true,
             posts: [],
             postUserId: selectedUserId.value,
             selectedPostId: undefined,
@@ -107,8 +126,8 @@ const getPosts = () => {
                 postState.value =
                     ({
                         ...postState.value,
-                        isError: false,
-                        isLoading: false,
+                        isPostsError: false,
+                        isPostsLoading: false,
                         posts
                     });
             })
@@ -117,8 +136,8 @@ const getPosts = () => {
         postState.value =
             ({
                 ...postState.value,
-                isError: true,
-                isLoading: false,
+                isPostsError: true,
+                isPostsLoading: false,
                 postUserId: undefined,
             });
     }
@@ -166,7 +185,7 @@ export function setSelectedSearchOptionValue(selectedValue: string): void {
 
 export const showPosts = (): void => {
     if (AppStore.selectedUserId.value !== undefined) {
-        if (!isLoading.value && (!isLoaded.value || postUserId.value !== AppStore.selectedUserId.value)) {
+        if (!isPostsLoading.value && (!isPostsLoaded.value || postUserId.value !== AppStore.selectedUserId.value)) {
             getPosts();
         }
     }
@@ -182,8 +201,8 @@ export const updatePost = (): void => {
 
     postState.value = {
         ...postState.value,
-        isError: false,
-        isLoading: true,
+        isPostSaveError: false,
+        isPostSaveLoading: true,
     };
 
     try {
@@ -198,12 +217,12 @@ export const updatePost = (): void => {
                 posts.push(updatedPost);
                 // sort posts by id
                 posts = [...posts].sort((a, b) => {
-                    return a.name.localeCompare(b.name);
+                    return (a.id < b.id) ? -1 : (a.id > b.id) ? 1 : 0;
                 });
                 postState.value =
                     {
                         ...postState.value,
-                        isLoading: false,
+                        isPostSaveLoading: false,
                         posts
                     };
             })
@@ -212,8 +231,8 @@ export const updatePost = (): void => {
         postState.value =
             ({
                 ...postState.value,
-                isError: true,
-                isLoading: false,
+                isPostSaveError: true,
+                isPostSaveLoading: false,
             });
     }
 }

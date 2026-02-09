@@ -1,4 +1,5 @@
 import * as AppStore from "../../appStore.tsx";
+import {MessageCard} from "../../shared/message-card/MessageCard.tsx";
 import {type NavigateFunction, useNavigate} from "react-router";
 import * as PostStore from "./postStore.ts";
 import type {PostType} from "./postTypes.ts";
@@ -49,25 +50,23 @@ function PostPage() {
             </section>
 
             {AppStore.isNoSelectedUser.value && (
-                <>
-                    <div>There is no selected user.</div>
-                    <div>Go to Users page to select a user.</div>
-                </>
+                <MessageCard variant="info"
+                             messageText="There is no selected user. Go to Users page to select."/>
             )}
 
-            {PostStore.isLoading.value && (
-                <p>Loading...</p>
+            {PostStore.isPostsLoading.value && (
+                <MessageCard variant="info" messageText="Loading..."/>
             )}
 
-            {PostStore.isError.value && (
-                <p>Error getting data.</p>
+            {PostStore.isPostsError.value && (
+                <MessageCard variant="error" messageText="Error in data access"/>
             )}
 
-            {PostStore.isEmpty.value && (
-                <p>None found.</p>
+            {PostStore.isPostsEmpty.value && (
+                <MessageCard variant="info" messageText="None found"/>
             )}
 
-            {PostStore.isLoaded.value && (
+            {PostStore.isPostsLoaded.value && (
                 <section>
                     <h3>Select a Post to edit</h3>
                     <p>User Id: {AppStore.selectedUserId.value}</p>
