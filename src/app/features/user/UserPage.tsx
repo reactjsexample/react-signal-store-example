@@ -59,7 +59,7 @@ function UserPage() {
             )}
 
             {UserStore.isUsersEmpty.value && (
-                <MessageCard variant="info" messageText="None foun."/>
+                <MessageCard variant="info" messageText="None found."/>
             )}
 
             {UserStore.isUsersLoaded.value && (

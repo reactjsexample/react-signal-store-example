@@ -59,11 +59,11 @@ function PostPage() {
             )}
 
             {PostStore.isPostsError.value && (
-                <MessageCard variant="error" messageText="Error in data access"/>
+                <MessageCard variant="error" messageText="Error in data access."/>
             )}
 
             {PostStore.isPostsEmpty.value && (
-                <MessageCard variant="info" messageText="None found"/>
+                <MessageCard variant="info" messageText="None found."/>
             )}
 
             {PostStore.isPostsLoaded.value && (
