@@ -11,9 +11,4 @@ export const userDataService = {
         }
         return response.json();
     },
-
-    // getUserById: async (id) => {
-    //     // ... logic for fetching a single user
-    // },
-    // ... other methods like createUser, updateUser, deleteUser
 };
